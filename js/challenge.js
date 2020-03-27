@@ -1,8 +1,12 @@
-const arr_likes = []
+const arr_likes = [];
+const pause_button = document.querySelector("#pause");
 
+document.addEventListener("DOMContentLoaded", () => {  
 setInterval(
     function() {
+        if (isRunning()){
         upCount();
+        }
     }, 1000);
 
 document.querySelector("#minus").addEventListener("click", function(event) {
@@ -57,6 +61,45 @@ document.querySelector("#heart").addEventListener("click", function(event) {
     
 })
 
+document.querySelector("#comment-form").addEventListener("submit", function(event) {
+    event.preventDefault()
+    if (document.querySelector("#comment-input").value !== ""){
+    let input = document.querySelector("#comment-input").value
+    let elem = document.createElement("li");
+    elem.innerText = input
+    document.getElementById("list").appendChild(elem);
+    document.getElementById("comment-input").value = "";
+    }
+    
+  });
+
+  pause_button.addEventListener("click", function(event) {
+    // console.log('paused?')  
+    if (isRunning()) {
+          pause_button.innerText = "resume";
+          document.getElementById("minus").disabled = true;
+          document.getElementById("plus").disabled = true;
+          document.getElementById("heart").disabled = true;
+          document.getElementById("submit").disabled = true;
+      } else {
+          pause_button.innerText = "pause";
+          document.getElementById("minus").disabled = false;
+          document.getElementById("plus").disabled = false;
+          document.getElementById("heart").disabled = false;
+          document.getElementById("submit").disabled = false;
+      }
+  })
+// pause counter
+// select pause
+// disable buttons for plus, minus, and like and submit
+
+// pause button says resume
+
+
+// when resume is clicked start counter and again button are abled again
+
+});
+
 function upCount() {
     let count = parseInt(document.getElementById("counter").innerText);
         // debugger
@@ -73,4 +116,14 @@ function downCount() {
         // debugger
     count -= 1;
     document.getElementById("counter").innerText = count;
+}
+
+// helper function ternary isRunning
+function isRunning() {
+    // console.log('running')
+    if (pause_button.innerText === "pause") {
+        return true 
+    } else {
+        return false
+    }  
 }
