@@ -158,6 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
     likeNumber(counterValue);
   });
 
+  // selects contents of text input field on comment form and returns string
   function getCommentText() {
     return commentField.value;
   }
@@ -183,9 +184,6 @@ document.addEventListener("DOMContentLoaded", () => {
       displayComment(text);
     };
   });
-
-  // disable buttons on pause
-
 
   // start the counter on load
   startIntervalCounter();
